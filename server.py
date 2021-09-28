@@ -102,7 +102,7 @@ def get_CirrosisType():
 @app.route("/wineQuality", methods=['POST'])
 def get_WineQuality():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4'], data['d5'], data['d6'], data['d7'], data['d8'], data['d9'], data['d10'], data['d11'], data['d12'], data['d13']]])
+    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4'], data['d5'], data['d6'], data['d7'], data['d8'], data['d9'], data['d10'], data['d11'], data['d12']]])
     #print(DF)
     loaded_model = pickle.load(open("modelo_clasificadorDeVino", 'rb'))
     #print("lda")
@@ -112,7 +112,7 @@ def get_WineQuality():
 @app.route("/homeRental", methods=['POST'])
 def get_HomeRental():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
+    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3']]])
     #print(DF)
     loaded_model = pickle.load(open("prediccion_precioCasas", 'rb'))
     #print("lda")
