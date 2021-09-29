@@ -22,30 +22,27 @@ CORS(app)
 @app.route("/avocadoPrice", methods=['POST'])
 def get_AvocadoPrice():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
-    #print(data)
+    DF=pd.DataFrame([[data['d1'], data['d2']]])
+    #print(DF)
     loaded_model = pickle.load(open("prediccion_precioAguacate", 'rb'))
-    #print("lda")
     result = loaded_model.predict(DF)
-    return jsonify({"response":result})
+    return jsonify({"response":result[0]})
 
 @app.route("/changeTp", methods=['POST'])
 def get_ChangeTp():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
+    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4'], data['d5'], data['d6'], data['d7'], data['d8'], data['d7'], data['d8']]])
     #print(DF)
     loaded_model = pickle.load(open("modelo_clasificadorClientesPasanCompañia", 'rb'))
-    #print("lda")
     result = loaded_model.predict(DF)
-    return jsonify({"response":result[0]})
+    #print(result[0])
+    return jsonify({"response":int(result[0])})
 
 @app.route("/vehiclePrice", methods=['POST'])
 def get_VehiclePrice():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
-    #print(DF)
+    DF=pd.DataFrame([[data['d1']]])
     loaded_model = pickle.load(open("prediccion_precioAutomovil", 'rb'))
-    #print("lda")
     result = loaded_model.predict(DF)
     return jsonify({"response":result[0]})
 
@@ -62,7 +59,7 @@ def get_FindIris():
 @app.route("/rossmannCompany", methods=['POST'])
 def get_RossmannCompany():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
+    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3']]])
     #print(DF)
     loaded_model = pickle.load(open("prediccion_ventasCompañiaRossmann", 'rb'))
     #print("lda")
@@ -92,11 +89,12 @@ def get_HepatitisType():
 @app.route("/cirrosisType", methods=['POST'])
 def get_CirrosisType():
     data = request.json
-    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4']]])
+    DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4'], data['d5'], data['d6'], data['d7'], data['d8'], data['d9']]])
     #print(DF)
     loaded_model = pickle.load(open("modelo_clasificadorDeCirrhosis", 'rb'))
-    #print("lda")
+    print("lda")
     result = loaded_model.predict(DF)
+    print("result")
     return jsonify({"response":result[0]})
     
 @app.route("/wineQuality", methods=['POST'])
