@@ -92,9 +92,9 @@ def get_CirrosisType():
     DF=pd.DataFrame([[data['d1'], data['d2'], data['d3'], data['d4'], data['d5'], data['d6'], data['d7'], data['d8'], data['d9']]])
     #print(DF)
     loaded_model = pickle.load(open("modelo_clasificadorDeCirrhosis", 'rb'))
-    print("lda")
+    print("todo bien hasta aqui")
     result = loaded_model.predict(DF)
-    print("result")
+    print(result)
     return jsonify({"response":result[0]})
     
 @app.route("/wineQuality", methods=['POST'])
