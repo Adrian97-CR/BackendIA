@@ -166,15 +166,15 @@ def upload():
     image = tf.expand_dims(image, axis=0)
     image = tf.image.resize_with_pad(image,513,513)
     mpredictions = hub.KerasLayer('https://tfhub.dev/google/seefood/segmenter/mobile_food_segmenter_V1/1', output_key="food_group_segmenter:semantic_predictions")
+
     predictions = mpredictions(image)
-    result = contar(predictions)
-    
+
+    nuevo = tf.reshape(predictions,[513,513])
+    result = tf.sparse.bincount(nuevo,minlength=1)
     vals =result.values.numpy()
     ind = result.indices.numpy()
     promVal = []
     relInd = []
-    print(vals.size)
-    print(ind.size)
     for i in range(1, vals.size):
         aux = round(vals[i]*100/(263169-vals[0]),0)
         if(1<aux):
@@ -193,7 +193,27 @@ if __name__ == "__main__":
 
 
 
+# def contar():
+#   nuevo = tf.reshape(predictions,[513,513])
+#   outputs = tf.sparse.bincount(nuevo,minlength=1)
+#   return outputs
 
+# #newpro = tf.cast(predictions,dtype=tf.float16)
+# result = contar()
+
+# vals =result.values.numpy()
+# ind = result.indices.numpy()
+# promVal = []
+# relInd = []
+# for i in range(1, vals.size):
+#   aux = round(vals[i]*100/(263169-vals[0]),0)
+#   if(1<aux):
+#     promVal.append(aux)
+#     relInd.append(csv[ind[i][0]])
+#   #print(ind[i][0])
+# print(promVal)
+# print(relInd)
+# ## Alli pueden sacar todos los 26 indices :)
 
 
 
